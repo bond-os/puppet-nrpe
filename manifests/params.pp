@@ -51,6 +51,18 @@ class nrpe::params {
       $nrpe_user        = 'nrpe'
       $nrpe_group       = 'nrpe'
     }
+    'ubuntu', 'debian': {
+      $confd            = '/etc/nagios/nrpe.d'
+      $nrpe_name        = 'nagios-nrpe-server'
+      $nrpe_service     = 'nagios-nrpe-server'
+      $sysconf          = '/etc/default/nagios-nrpe-server'
+      $sysconf_template = 'nrpe/nrpe-sysconfig.erb'
+      $use_sysconf      = true
+      $pluginspackage   = 'nagios-plugins'
+      $pid_file         = '/var/run/nagios/nrpe.pid'
+      $nrpe_user        = 'nagios'
+      $nrpe_group       = 'nagios'
+    }
     default: {
       fail("The ${module_name} module is not support on ${::operatingsystem}")
     }

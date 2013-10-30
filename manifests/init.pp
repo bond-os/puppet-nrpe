@@ -52,7 +52,9 @@ class nrpe (
   $service_ensure=running,
   $service_enable=true,
   $version='UNSET',
-  $ssl=false
+  $ssl=false,
+  $commands={},
+  $options={}
 ) {
 
   include nrpe::params
@@ -104,4 +106,8 @@ class nrpe (
     mode    => '0755',
     notify  => Service['nrpe'];
   }
+
+  create_resources(nrpe::command, $commands)
+
+  create_resources(nrpe::config, $options)
 }
